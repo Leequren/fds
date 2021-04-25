@@ -11,9 +11,9 @@ router.get('/login', straightAuth, (req, res) => res.render('login'));
 router.get('/register', straightAuth, (req, res) => res.render('register'));
 
 router.post('/register', (req, res) => {
-    const {name, email, password, password2} = req.body;
+    const {name, email, role, password, password2} = req.body;
     let errors = [];
-
+    console.log({role});
     if (!name || !email || !password || !password2) {
         errors.push({msg: 'Заполните все поля'});
     }
@@ -31,6 +31,7 @@ router.post('/register', (req, res) => {
             errors,
             name,
             email,
+            role,
             password,
             password2
         });
@@ -42,6 +43,7 @@ router.post('/register', (req, res) => {
                     errors,
                     name,
                     email,
+                    role,
                     password,
                     password2
                 });
@@ -49,6 +51,7 @@ router.post('/register', (req, res) => {
                 const newUser = new User({
                     name,
                     email,
+                    role,
                     password
                 });
 

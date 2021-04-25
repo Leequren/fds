@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+
 require('./config/passport')(passport);
+
+
 const db = require('./config/dbInf').db;
 mongoose
     .connect(
@@ -13,8 +16,13 @@ mongoose
     )
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
 const app = express();
+
 app.use(expressLayouts);
+
+app.use(express.static(__dirname + '/static'));
+
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 app.use(
@@ -24,6 +32,7 @@ app.use(
         saveUninitialized: true
     })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -35,5 +44,7 @@ app.use(function (req, res, next) {
 });
 app.use('/users', require('./routes/users.js'));
 app.use('/', require('./routes/index.js'));
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Сервер на работе :D :  ${PORT}`));

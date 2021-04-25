@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/assets/register/style.css">
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
         <div class="card card-body">
@@ -28,6 +29,20 @@
                             value="<%= typeof email != 'undefined' ? email : '' %>"
                     />
                 </div>
+                
+                <div class="form-group">
+                    <label>Выберите роль:</label>
+                    <div>
+                        <input type="radio" name="role" value="Customer" id="role1">
+                        <label for="role1"s>Заказчик</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="role" value="Executor" id="role2">
+                        <label for="role2">Исполнитель</label>
+                    </div>
+
+                </div>
+
                 <div class="form-group">
                     <label for="password">Пароль</label>
                     <input
